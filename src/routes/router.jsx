@@ -58,11 +58,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "product/:id",
-        element: (
-          <PrivateRoute>
-            <ProductDetails />
-          </PrivateRoute>
-        ),
+        element: <ProductDetails />,
       },
       {
         path: "order-form/:id",

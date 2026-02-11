@@ -81,9 +81,9 @@ export default function OrderForm() {
         // console.log("Order created:", orderResponse.data);
 
         if (product.paymentMethod == "stripe") {
-          const checkoutResponse = await axiosInstance.post(
+          const checkoutResponse = await axiosSecure.post(
             "/create-checkout-session",
-            orderPayload
+            orderPayload,
           );
 
           if (checkoutResponse.data.url) {
@@ -126,7 +126,7 @@ export default function OrderForm() {
         <label className="label">Product</label>
         <input
           type="text"
-          value={product.name}
+          value={product.title}
           readOnly
           className="input input-bordered w-full bg-gray-100"
           {...register("name")}

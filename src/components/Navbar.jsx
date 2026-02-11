@@ -93,7 +93,7 @@ export default function Navbar() {
               <figure>
                 <img
                   src={user.photoURL}
-                  alt=""
+                  alt={user.displayName}
                   className="rounded-full w-10 h-10 object-cover object-center"
                 />
               </figure>

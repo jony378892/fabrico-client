@@ -3,9 +3,11 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../hooks/useAuth";
+import { useEffect } from "react";
 
 export default function Login() {
   const { signInUser } = useAuth();
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -32,6 +34,12 @@ export default function Login() {
         toast(error);
       });
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="hero min-h-screen">
