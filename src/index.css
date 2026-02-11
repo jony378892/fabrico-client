@@ -3,6 +3,10 @@
   themes: light --default;
 }
 
+a.active {
+  @apply text-blue-600 font-semibold underline underline-offset-4 decoration-2;
+}
+
 .swiper {
   width: 100%;
   padding-top: 50px;

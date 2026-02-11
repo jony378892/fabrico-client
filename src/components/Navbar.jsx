@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "./Shared/Logo";
 
 import useAuth from "../hooks/useAuth";
@@ -21,92 +21,91 @@ export default function Navbar() {
 
   const links = (
     <>
-      <div className="md:flex items-center hidden">
+      <div className="md:flex items-center gap-4 text-sm hidden">
         <li>
-          <Link to="/">Home</Link>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <Link to="/products">Products</Link>
+          <NavLink to="/products">Products</NavLink>
         </li>
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
       </div>
       <div className="flex items-center gap-3">
-        {user ? (
-          <>
-            <li>
+        <li>
+          <NavLink className="hidden md:inline-block" to="/about">
+            About Us
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className="hidden md:inline-block" to="/contact">
+            Contact
+          </NavLink>
+        </li>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="sticky top-0 inset-x-0 bg-white z-10 shadow-lg">
+      <div className="flex items-center justify-between px-3 py-1.5 mx-auto max-w-7xl">
+        <div className="flex items-center">
+          <div className="dropdown md:hidden">
+            <div tabIndex={0} role="button" className="cursor-pointer">
+              <IoMdMenu size={24} className="mr-2" />
+            </div>
+            <ul
+              tabIndex="-1"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow-lg border border-gray-300"
+            >
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/products">Products</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+              <li>
+                <NavLink to="/about">About Us</NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact">Contact</NavLink>
+              </li>
+            </ul>
+          </div>
+          <Logo />
+        </div>
+        <div className="flex-none">
+          <ul className="flex text-sm items-center gap-4 px-3">{links}</ul>
+        </div>
+        <div className="flex items-center gap-3">
+          {user ? (
+            <>
               <button
                 className="btn btn-error btn-sm ml-2"
                 onClick={handleLogOut}
               >
                 Logout
               </button>
-            </li>
-            <figure>
-              <img
-                src={user.photoURL}
-                alt=""
-                className="rounded-full w-10 h-10 object-cover object-center"
-              />
-            </figure>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link className="hidden md:inline-block" to="/about">
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link className="hidden md:inline-block" to="/contact">
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </>
-        )}
-      </div>
-    </>
-  );
-
-  return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="flex-1 flex items-center">
-        <div className="dropdown md:hidden">
-          <div tabIndex={0} role="button" className="cursor-pointer">
-            <IoMdMenu size={24} className="mr-2" />
-          </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow-lg border border-gray-300"
-          >
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/products">Products</Link>
-            </li>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
+              <figure>
+                <img
+                  src={user.photoURL}
+                  alt=""
+                  className="rounded-full w-10 h-10 object-cover object-center"
+                />
+              </figure>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-sm sm:btn-md btn-outline btn-primary">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
-        <Logo />
-      </div>
-      <div className="flex-none ">
-        <ul className="menu menu-horizontal px-1 items-center">{links}</ul>
       </div>
     </div>
   );
